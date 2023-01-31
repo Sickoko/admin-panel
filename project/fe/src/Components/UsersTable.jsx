@@ -2,14 +2,14 @@ import { DataGrid } from "@mui/x-data-grid";
 
 export default function UsersTable() {
   const columns = [
-    { field: "firstName", headerName: "First name", width: 260 },
-    { field: "lastName", headerName: "Last name", width: 260 },
-    { field: "PhoneNum", headerName: "Phone Number", width: 260 },
-    { field: "email", headerName: "E-Mail", width: 260 },
-    { field: "Role", headerName: "Role", width: 260 },
-    { field: "Disabled", headerName: "Disabled", width: 260 },
-    { field: "avatar", headerName: "Avatar", width: 260 },
-    { field: "action", headerName: "Actions", width: 260 },
+    { field: "firstName", headerName: "First name", width: 130 },
+    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "PhoneNum", headerName: "Phone Number", width: 130 },
+    { field: "email", headerName: "E-Mail", width: 103 },
+    { field: "Role", headerName: "Role", width: 130 },
+    { field: "Disabled", headerName: "Disabled", width: 130 },
+    { field: "avatar", headerName: "Avatar", width: 130 },
+    { field: "action", headerName: "Actions", width: 130 },
   ];
   const rows = [
     {
