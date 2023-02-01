@@ -4,7 +4,7 @@
 .sidebar {
   display: flex;
   justify-content: start;
-  color: #ccc;
+  color: #999999;
   position: sticky;
   background: #fff;
 }
@@ -15,9 +15,16 @@ ul li {
   padding-left: 0 auto;
   padding-right: 20px;
 }
+
 .outer {
   display: flex;
 }
 hr {
   width: 100%;
+  height: 1px;
+  background: #cccccc;
+}
+.side {
+  display: flex;
+  justify-content: start;
 }

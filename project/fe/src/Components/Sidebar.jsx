@@ -1,56 +1,74 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import HomeIcon from "@mui/icons-material/Home";
-export default function () {
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Collapse from "@mui/material/Collapse";
+import PersonIcon from "@mui/icons-material/Person";
+import { useState } from "react";
+import DescriptionIcon from "@mui/icons-material/Description";
+
+export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(true);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div className="sidebar">
-      <ul>
-        <li>
-          <a>
-            <AccountCircleIcon />
-            Profile
-          </a>
-        </li>
-        <li>
-          <a>
-            <HomeIcon />
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a>E-commerce</a>
-        </li>
-        <li>
-          <a>User</a>
-        </li>
-        <li>
-          <a>Documentation</a>
-        </li>
-        <h4>Template</h4>
-        <li>
-          <a>Core</a>
-        </li>
-        <li>
-          <a>Tables</a>
-        </li>
-        <li>
-          <a>UI Elements</a>
-        </li>
-        <li>
-          <a>Forms</a>
-        </li>
-        <li>
-          <a>Charts</a>
-        </li>
-        <li>
-          <a>Grid</a>
-        </li>
-        <li>
-          <a>Maps</a>
-        </li>
-        <li>
-          <a>Extra</a>
-        </li>
-      </ul>
-    </div>
+    <List>
+      <ListItemButton onClick={handleOpen} sx={{ mt: 1 }}>
+        <ListItemIcon sx={{ pl: 4 }}>
+          <PersonIcon />
+        </ListItemIcon>
+        <ListItemText secondary="User" />
+        {isOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemText
+              secondary="User List"
+              sx={{
+                marginLeft: 10,
+                paddingLeft: 0,
+                listStyleType: "disc",
+                display: "list-item",
+                color: "gray",
+              }}
+            />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemText
+              secondary="User Add"
+              sx={{
+                marginLeft: 10,
+                paddingLeft: 0,
+                listStyleType: "disc",
+                display: "list-item",
+                color: "gray",
+              }}
+            />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemText
+              secondary="User Edit"
+              sx={{
+                marginLeft: 10,
+                paddingLeft: 0,
+                listStyleType: "disc",
+                display: "list-item",
+                color: "gray",
+              }}
+            />
+          </ListItemButton>
+        </List>
+      </Collapse>
+      <ListItemButton sx={{ mt: 1 }}>
+        <ListItemIcon sx={{ pl: 4 }}>
+          <DescriptionIcon />
+        </ListItemIcon>
+        <ListItemText secondary="Dashboard" />
+      </ListItemButton>
+    </List>
   );
 }
