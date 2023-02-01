@@ -27,4 +27,5 @@ hr {
 .side {
   display: flex;
   justify-content: start;
+  gap: 30px;
 }
