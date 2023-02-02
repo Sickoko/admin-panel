@@ -7,6 +7,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import DescriptionIcon from "@mui/icons-material/Description";
 
 export default function Sidebar() {
@@ -48,6 +49,7 @@ export default function Sidebar() {
                 color: "gray",
               }}
             />
+            <Link to={"/addusers"}>User add</Link>
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemText

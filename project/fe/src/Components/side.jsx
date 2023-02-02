@@ -12,6 +12,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import SidebarBottom from "./sidebarbot";
+import { Divider } from "@mui/material";
 
 export default function Side() {
   const [open, setOpen] = useState(true);
@@ -22,7 +23,7 @@ export default function Side() {
 
   return (
     <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+      sx={{ width: "100%", maxWidth: 300, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
@@ -86,7 +87,7 @@ export default function Side() {
         </List>
       </Collapse>
       <Sidebar />
-      <hr />
+      <Divider />
       <SidebarBottom />
     </List>
   );

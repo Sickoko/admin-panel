@@ -3,7 +3,7 @@
 }
 .sidebar {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   color: #999999;
   position: sticky;
   background: #fff;
@@ -26,6 +26,6 @@ hr {
 }
 .side {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 30px;
 }
