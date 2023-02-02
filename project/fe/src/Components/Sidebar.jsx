@@ -9,6 +9,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import DescriptionIcon from "@mui/icons-material/Description";
+import { fontSize } from "@mui/system";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -27,41 +28,46 @@ export default function Sidebar() {
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText
-              secondary="User List"
-              sx={{
-                marginLeft: 10,
-                paddingLeft: 0,
-                listStyleType: "disc",
-                display: "list-item",
-                color: "gray",
-              }}
-            />
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              <ListItemText
+                secondary="User List"
+                sx={{
+                  marginLeft: 10,
+                  paddingLeft: 0,
+                  listStyleType: "disc",
+                  display: "list-item",
+                  color: "gray",
+                }}
+              />
+            </Link>
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText
-              secondary="User Add"
-              sx={{
-                marginLeft: 10,
-                paddingLeft: 0,
-                listStyleType: "disc",
-                display: "list-item",
-                color: "gray",
-              }}
-            />
-            <Link to={"/addusers"}>User add</Link>
+            <Link to={"/addusers"} style={{ textDecoration: "none" }}>
+              <ListItemText
+                secondary=" User Add"
+                sx={{
+                  marginLeft: 10,
+                  paddingLeft: 0,
+                  listStyleType: "disc",
+                  display: "list-item",
+                  color: "gray",
+                }}
+              ></ListItemText>
+            </Link>
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText
-              secondary="User Edit"
-              sx={{
-                marginLeft: 10,
-                paddingLeft: 0,
-                listStyleType: "disc",
-                display: "list-item",
-                color: "gray",
-              }}
-            />
+            <Link to={""} style={{ textDecoration: "none" }}>
+              <ListItemText
+                secondary=" User Edit"
+                sx={{
+                  marginLeft: 10,
+                  paddingLeft: 0,
+                  listStyleType: "disc",
+                  display: "list-item",
+                  color: "gray",
+                }}
+              />
+            </Link>
           </ListItemButton>
         </List>
       </Collapse>
