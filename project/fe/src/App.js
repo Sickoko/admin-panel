@@ -1,18 +1,16 @@
 import { Routes, Route, Link } from "react-router-dom";
-import Users from "./Pages/Users";
 import "./App.css";
+import Product from "./Pages/AddProduct";
 import AddUsers from "./Pages/AddUsers";
-import Side from "./Components/side";
-import Header from "./Components/Header";
+import UserList from "./Pages/UserList";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Side />
       <Routes>
-        <Route path="/users" element={<Users />} />
         <Route path="/addusers" element={<AddUsers />} />
+        <Route path="/userlist" element={<UserList />} />
+        <Route path="/addproduct" element={<Product />} />
       </Routes>
     </div>
   );

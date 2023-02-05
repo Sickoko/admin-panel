@@ -1,36 +1,42 @@
-import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import { fontSize } from "@mui/system";
 
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+function handleClick(event) {
+  event.preventDefault();
+  console.info("You clicked a breadcrumb.");
+}
 
-export default function Direction() {
+export default function BasicBreadcrumbs() {
   return (
-    <Box
-      sx={{
-        backgroundColor: "white",
-        width: "100%",
-        display: "flex",
-        height: "4%",
-        alignItems: "center",
-        borderRadius: 1,
-        mt: 2,
-        mb: 2,
-      }}
-    >
-      <List>
-        <ListItem style={{ color: "gray" }}>
-          <ListItemButton>
-            <ListItemText primary="App" />
-          </ListItemButton>
-          <ListItemText primary=">" />
-          <ListItemButton>
-            <ListItemText primary="User" />
-          </ListItemButton>
-          <ListItemText primary=">" />
-          <ListItemButton>
-            <ListItemText primary="New" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
+    <div onClick={handleClick} sx={{ mb: 5 }}>
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        sx={{
+          backgroundColor: "white",
+          mb: 2,
+          mt: 2,
+          fontSize: 18,
+          p: 1,
+          borderRadius: 1,
+          paddingLeft: 3,
+        }}
+      >
+        <Link underline="hover" color="inherit" href="/">
+          App
+        </Link>
+        <Link
+          underline="hover"
+          color="inherit"
+          href="/material-ui/getting-started/installation/"
+        >
+          User
+        </Link>
+        <Typography color="text.primary" fontSize={18}>
+          New
+        </Typography>
+      </Breadcrumbs>
+    </div>
   );
 }
