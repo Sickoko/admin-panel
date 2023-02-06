@@ -6,6 +6,7 @@ const express = require("express");
 const cors = require("cors");
 
 const fs = require("fs");
+const { response } = require("express");
 
 ///configuration of modules
 
@@ -16,20 +17,21 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/users", (request, response) => {
-  console.log("get method");
   fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
-        status: "file reader error",
+        status: "file not found",
         data: [],
       });
     }
 
-    const objectData = JSON.parse(readData);
+    const timerData = JSON.parse(readData);
+    console.log(timerData);
+    console.log(typeof timerData);
 
     response.json({
       status: "success",
-      data: objectData,
+      data: timerData,
     });
   });
 });
@@ -79,6 +81,36 @@ app.post("/users", (request, response) => {
     );
   });
 });
+app.delete("/users", (request, response) => {
+  const body = request.body;
+  fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file not found",
+        data: [],
+      });
+    }
+    const readObject = JSON.parse(readData);
+    const filteredObjects = readObject.filter((o) => o.id !== body.userId);
+    fs.writeFile(
+      "./Public/data/users.json",
+      JSON.stringify(filteredObjects),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "write file error",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: filteredObjects,
+        });
+      }
+    );
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

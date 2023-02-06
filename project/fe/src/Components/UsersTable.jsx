@@ -1,17 +1,14 @@
-import { Button, FormControl, Typography, Link } from "@mui/material";
-import { color, height, style } from "@mui/system";
+import { Button, FormControl, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import Header from "./Header";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Side from "./side";
-import Direction from "./Direction";
 import About from "./about";
-import { useEffect } from "react";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
+import { useEffect, useState } from "react";
+import { Box, Stack } from "@mui/system";
 
-export default function UsersTable({ users, setUsers }) {
+import { Link } from "react-router-dom";
+
+export default function UsersTable() {
   const URL = "http://localhost:8080/users";
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -21,7 +18,6 @@ export default function UsersTable({ users, setUsers }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
-
   async function handleDelete(id) {
     const options = {
       method: "DELETE",
@@ -36,33 +32,29 @@ export default function UsersTable({ users, setUsers }) {
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
-  function handleClick(event) {
-    event.preventDefault();
-  }
+
   const columns = [
-    { field: "firstName", headerName: "First name", width: 230 },
-    { field: "lastName", headerName: "Last name", width: 230 },
-    { field: "PhoneNum", headerName: "Phone Number", width: 200 },
+    { field: "firstname", headerName: "First name", width: 230 },
+    { field: "lastname", headerName: "Last name", width: 230 },
+    { field: "phonenumber", headerName: "Phone Number", width: 200 },
     { field: "email", headerName: "E-Mail", width: 232 },
-    { field: "Role", headerName: "Role", width: 130 },
+    { field: "role", headerName: "Role", width: 130 },
     { field: "Disabled", headerName: "Disabled", width: 130 },
-    { field: "avatar", headerName: "Avatar", width: 130 },
+    { field: "avatar", headerName: "Avatar", width: 110 },
+
     {
       field: "Action",
       headerName: "Action",
-      width: 160,
+      width: 150,
       renderCell: (params) => {
         return (
           <Box width="100%">
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={1}>
               <Link to={`/user/edit/${params.row.id}`}>
-                <Button variant="outlined" color="success">
-                  Edit
-                </Button>
+                <Button variant="contained">Edit</Button>
               </Link>
               <Button
-                variant="outlined"
-                color="error"
+                variant="contained"
                 onClick={() => handleDelete(params.row.id)}
               >
                 Delete
@@ -76,7 +68,7 @@ export default function UsersTable({ users, setUsers }) {
 
   return (
     <div>
-      {/* <div
+      <div
         style={{
           backgroundColor: "white",
           height: "500px",
@@ -110,15 +102,17 @@ export default function UsersTable({ users, setUsers }) {
             <Button variant="contained" style={{ marginBottom: "25px" }}>
               ADD FILTER
             </Button>
-          </FormControl> */}
-      <DataGrid
-        rows={users}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
+          </FormControl>
 
+          <DataGrid
+            rows={users}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </div>
+      </div>
       <About />
     </div>
   );
