@@ -16,6 +16,8 @@ const PORT = 8080;
 app.use(cors());
 app.use(express.json());
 
+//USERS
+
 app.get("/users", (request, response) => {
   fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
@@ -111,6 +113,7 @@ app.delete("/users", (request, response) => {
   });
 });
 
+//Products
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

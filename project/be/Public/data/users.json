@@ -1,1 +1,9 @@
-[{"id":"1675688203178","firstname":"AUDWADd","lastname":"ADKADd","phonenumber":"88623024","email":"blablsa@gmail.com"}]
+[
+  {
+    "id": "1675688203178",
+    "firstname": "AUDWADd",
+    "lastname": "ADKADd",
+    "phonenumber": "88623024",
+    "email": "blablsa@gmail.com"
+  }
+]
