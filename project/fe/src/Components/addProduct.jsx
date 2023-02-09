@@ -1,15 +1,11 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import Form from "@mui/material";
-import { fontSize, width } from "@mui/system";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import About from "./about";
 export default function AddProduct() {
@@ -129,7 +125,15 @@ export default function AddProduct() {
   }
   return (
     <div>
-      <div style={{ backgroundColor: "white", padding: 20, borderRadius: 5 }}>
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: 20,
+          borderRadius: 5,
+          marginBottom: "15px",
+          marginTop: "35px",
+        }}
+      >
         <Typography color="gray" sx={{ pt: 2, fontSize: 28 }}>
           Add Users
         </Typography>
@@ -142,85 +146,180 @@ export default function AddProduct() {
               gap: 3,
             }}
           >
-            <FormLabel>
-              Image
+            <FormControl>
+              <FormLabel sx={{ fontSize: "18px", pt: "50px" }}>Image</FormLabel>
+              <FormControl
+                sx={{ maxWidth: 200, marginLeft: "300px", marginTop: "-40px" }}
+              >
+                <Select
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  <MenuItem> </MenuItem>
+                  <MenuItem> </MenuItem>
+                  <MenuItem> </MenuItem>
+                </Select>
+              </FormControl>
+            </FormControl>
+
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Title
               <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "266px",
+                  minWidth: "550px",
+                }}
                 id="outlined-start-adornment"
-                name="firstname"
-                value={currentUser.firstname}
-                onChange={handleFirstname}
+                name="lastname"
+                value={currentUser.lastname}
+                onChange={handleLastname}
               />
             </FormLabel>
-            <TextField
-              id="outlined-start-adornment"
-              name="lastname"
-              value={currentUser.lastname}
-              onChange={handleLastname}
-            />
-            <TextField
-              id="outlined-start-adornment"
-              name="phonenumber"
-              value={currentUser.phonenumber}
-              onChange={handlePhonenumber}
-            />
-            <TextField
-              id="outlined-start-adornment"
-              name="email"
-              value={currentUser.email}
-              onChange={handleEmail}
-            />
-            <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="admin"
-                name="radio-buttons-group"
-              >
-                <FormControlLabel
-                  value="admin"
-                  control={<Radio />}
-                  label="admin"
-                />
-                <FormControlLabel
-                  value="user"
-                  control={<Radio />}
-                  label="user"
-                />
-              </RadioGroup>
-            </FormControl>
-            <FormLabel>Disabled</FormLabel>
-            <Checkbox sx={{ display: "flex", justifyContent: "flex-start" }} />
-            <FormLabel>Avatar</FormLabel>
-            <Button variant="contained" sx={{ width: 200 }}>
-              UPLOAD AN IMAGE
-            </Button>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-            />
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Subtitle
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "239px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Price
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "258px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Discount
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "230px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Description 1
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "194px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Description 2
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "194px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Code
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "258px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Hashtag
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "234px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Technology
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "209px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
+            <FormLabel sx={{ fontSize: "18px" }}>
+              Rating
+              <TextField
+                sx={{
+                  marginTop: "-10px",
+                  marginLeft: "249px",
+                  minWidth: "550px",
+                }}
+                id="outlined-start-adornment"
+                name="phonenumber"
+                value={currentUser.phonenumber}
+                onChange={handlePhonenumber}
+              />
+            </FormLabel>
 
             <FormControl
               sx={{ display: "flex", flexDirection: "row", gap: 2, pb: 3 }}
             >
-              <Button variant="contained" sx={{ width: 80 }} type="submit">
+              <Button
+                variant="contained"
+                sx={{ width: 80, backgroundColor: "#1de9b6" }}
+                type="submit"
+              >
                 Save
               </Button>
               <Button
-                variant="outlined"
-                sx={{ width: 80 }}
+                variant="contained"
+                sx={{ width: 80, color: "#000" }}
                 onClick={() => handleReset()}
               >
-                Reset
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{ width: 80 }}
-                onClick={() => handleCancel()}
-              >
-                Cancel
+                Back
               </Button>
             </FormControl>
           </Box>
