@@ -2,8 +2,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Product from "./Pages/AddProduct";
 import AddUsers from "./Pages/AddUsers";
+import ProductsList from "./Pages/ProductsList";
 import UserList from "./Pages/UserList";
-
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Route path="/addusers" element={<AddUsers />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/addproduct" element={<Product />} />
+        <Route path="/productslist" element={<ProductsList />} />
       </Routes>
     </div>
   );

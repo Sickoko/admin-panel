@@ -4,41 +4,78 @@ import { Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import About from "./about";
-export default function AddProduct() {
-  const URL = "http://localhost:8080/users";
-  const newUser = {
+
+export default function AddProduct(id) {
+  const URL = "http://localhost:8080/products";
+  const newProduct = {
     id: "",
-    firstname: "",
-    lastname: "",
-    phonenumber: "",
-    email: "",
+    image: "",
+    title: "",
+    subtitle: "",
+    price: "",
+    discount: "",
+    description: "",
+    descriptionn: "",
+    code: "",
+    hashtag: "",
+    technology: "",
+    rating: "",
   };
-  const [users, setUsers] = useState([]);
+
   const [isUpdate, setIsUpdate] = useState(false);
-  const [currentUser, setCurrentUser] = useState(newUser);
+  const [currentProduct, setCurrentProduct] = useState(newProduct);
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     fetchAllData();
-  }, []);
+    if (id) {
+      setIsUpdate(true);
+      const filteredProduct = products.filter(
+        (product) => product.id === id
+      )[0];
 
+      if (filteredProduct) {
+        setCurrentProduct({
+          ...currentProduct,
+          id: filteredProduct.id,
+          title: filteredProduct.title,
+          price: filteredProduct.price,
+          image: filteredProduct.image,
+          discount: filteredProduct.discount,
+          descriptionn: filteredProduct.descriptionn,
+          code: filteredProduct.code,
+          hashtag: filteredProduct.hashtag,
+          description: filteredProduct.description,
+          rating: filteredProduct.rating,
+          subtitle: filteredProduct.subtitle,
+          technology: filteredProduct.technology,
+        });
+      }
+    }
+  }, []);
   async function fetchAllData() {
-    const FETCHED_DATA = await fetch(URL); //reponse
-    const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
-    setUsers(FETCHED_JSON.data);
-    console.log("Fetch users");
+    const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setProducts(FETCHED_JSON.data);
   }
-  async function handleSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
 
     if (!isUpdate) {
       const postData = {
-        firstname: e.target.firstname.value,
-        lastname: e.target.lastname.value,
-        phonenumber: e.target.phonenumber.value,
-        email: e.target.email.value,
+        image: e.target.image.value,
+        title: e.target.title.value,
+        subtitle: e.target.subtitle.value,
+        price: e.target.price.value,
+        discount: e.target.discount.value,
+        description: e.target.description.value,
+        descriptionn: e.target.descriptionn.value,
+        code: e.target.description.value,
+        hashtag: e.target.hashtag.value,
+        technology: e.target.technology.value,
+        rating: e.target.rating.value,
       };
 
       const options = {
@@ -51,16 +88,23 @@ export default function AddProduct() {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUsers(FETCHED_JSON.data);
+      setProducts(FETCHED_JSON.data);
     } else {
       const putData = {
-        id: currentUser.id,
-        firstname: currentUser.firstname,
-        lastname: currentUser.lastname,
-        phonenumber: currentUser.phonenumber,
-        email: currentUser.email,
+        id: currentProduct.id,
+        image: currentProduct.image,
+        title: currentProduct.title,
+        subtitle: currentProduct.subtitle,
+        price: currentProduct.price,
+        discount: currentProduct.discount,
+        description: currentProduct.description,
+        descriptionn: currentProduct.descriptionn,
+        code: currentProduct.code,
+        hashtag: currentProduct.hashtag,
+        technology: currentProduct.technology,
+        rating: currentProduct.rating,
       };
-      console.log(putData, "putdata");
+
       const options = {
         method: "PUT",
         headers: {
@@ -71,58 +115,89 @@ export default function AddProduct() {
 
       const FETCHED_DATA = await fetch(URL, options);
       const FETCHED_JSON = await FETCHED_DATA.json();
-      setUsers(FETCHED_JSON.data);
-      console.log(FETCHED_JSON.data, "FETCHED JSON");
+      setProducts(FETCHED_JSON.data);
       setIsUpdate(false);
-      setCurrentUser(newUser);
+      setCurrentProduct(newProduct);
     }
   }
 
-  async function handleEdit(userId) {
-    setIsUpdate(true);
-    const filteredUser = users.filter((user) => user.id === userId)[0];
-    if (filteredUser) {
-      setCurrentUser({
-        id: filteredUser.id,
-        firstname: filteredUser.firstname,
-        lastname: filteredUser.lastname,
-        phonenumber: filteredUser.phonenumber,
-        email: filteredUser.email,
-      });
-    }
-  }
-  function handleFirstname(e) {
-    setCurrentUser({
-      ...currentUser,
-      firstname: e.target.value,
-    });
-  }
-  function handleLastname(e) {
-    setCurrentUser({
-      ...currentUser,
-      lastname: e.target.value,
-    });
-  }
-  function handlePhonenumber(e) {
-    setCurrentUser({
-      ...currentUser,
-      phonenumber: e.target.value,
-    });
-  }
-  function handleEmail(e) {
-    setCurrentUser({
-      ...currentUser,
-      email: e.target.value,
+  function handleTitle(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      title: e.target.value,
     });
   }
 
+  function handlePrice(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      price: e.target.value,
+    });
+  }
+
+  function handleImage(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      image: e.target.value,
+    });
+  }
+
+  function handleSubtitle(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      subtitle: e.target.value,
+    });
+  }
+
+  function handleDiscount(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      discount: e.target.value,
+    });
+  }
+
+  function handleCode(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      code: e.target.value,
+    });
+  }
+
+  function handleDescription(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      description: e.target.value,
+    });
+  }
+
+  function handleDescriptionn(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      descriptionn: e.target.value,
+    });
+  }
+  function handleHashtag(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      hashtag: e.target.value,
+    });
+  }
+  function handleTechnology(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      technology: e.target.value,
+    });
+  }
+  function handleRating(e) {
+    setCurrentProduct({
+      ...currentProduct,
+      rating: e.target.value,
+    });
+  }
   function handleReset() {
     console.log("Reset button clicked");
   }
 
-  function handleCancel() {
-    console.log("Cancel button clicked");
-  }
   return (
     <div>
       <div
@@ -137,7 +212,7 @@ export default function AddProduct() {
         <Typography color="gray" sx={{ pt: 2, fontSize: 28 }}>
           Add Users
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
           <Box
             sx={{
               display: "flex",
@@ -148,18 +223,19 @@ export default function AddProduct() {
           >
             <FormControl>
               <FormLabel sx={{ fontSize: "18px", pt: "50px" }}>Image</FormLabel>
-              <FormControl
-                sx={{ maxWidth: 200, marginLeft: "300px", marginTop: "-40px" }}
-              >
-                <Select
-                  displayEmpty
-                  inputProps={{ "aria-label": "Without label" }}
-                >
-                  <MenuItem> </MenuItem>
-                  <MenuItem> </MenuItem>
-                  <MenuItem> </MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                sx={{
+                  marginTop: "-30px",
+                  marginLeft: "300px",
+                  maxWidth: "350px",
+                }}
+                id="outlined-basic"
+                label="Image"
+                variant="outlined"
+                name="image"
+                value={currentProduct.image}
+                onChange={handleImage}
+              />
             </FormControl>
 
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -172,8 +248,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="lastname"
-                value={currentUser.lastname}
-                onChange={handleLastname}
+                value={currentProduct.title}
+                onChange={handleTitle}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -186,8 +262,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.subtitle}
+                onChange={handleSubtitle}
               />
             </FormLabel>
 
@@ -201,8 +277,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.price}
+                onChange={handlePrice}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -215,8 +291,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.discount}
+                onChange={handleDiscount}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -229,8 +305,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.description}
+                onChange={handleDescription}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -243,8 +319,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.descriptionn}
+                onChange={handleDescriptionn}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -257,8 +333,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.code}
+                onChange={handleCode}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -271,8 +347,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.hashtag}
+                onChange={handleHashtag}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -285,8 +361,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.technology}
+                onChange={handleTechnology}
               />
             </FormLabel>
             <FormLabel sx={{ fontSize: "18px" }}>
@@ -299,8 +375,8 @@ export default function AddProduct() {
                 }}
                 id="outlined-start-adornment"
                 name="phonenumber"
-                value={currentUser.phonenumber}
-                onChange={handlePhonenumber}
+                value={currentProduct.rating}
+                onChange={handleRating}
               />
             </FormLabel>
 
