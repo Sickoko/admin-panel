@@ -32,7 +32,6 @@ export default function AddUser() {
     const FETCHED_DATA = await fetch(URL); //reponse
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
     setUsers(FETCHED_JSON.data);
-    console.log("Fetch users");
   }
   async function handleSubmit(e) {
     e.preventDefault();
