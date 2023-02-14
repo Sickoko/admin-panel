@@ -16,7 +16,19 @@ app.use(cors());
 app.use(express.json());
 
 //USERS
-
+app.get("/users/roles", (request, response) => {
+  fs.readFile("./Public/data/userRole.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file doesnt exit",
+      });
+    }
+    response.json({
+      status: "success",
+      data: JSON.parse(readData),
+    });
+  });
+});
 app.get("/users", (request, response) => {
   fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
@@ -27,8 +39,6 @@ app.get("/users", (request, response) => {
     }
 
     const timerData = JSON.parse(readData);
-    console.log(timerData);
-    console.log(typeof timerData);
 
     response.json({
       status: "success",
@@ -38,9 +48,7 @@ app.get("/users", (request, response) => {
 });
 
 app.post("/users", (request, response) => {
-  console.log("post method");
   const body = request.body;
-  console.log(body);
 
   const newUser = {
     id: Date.now().toString(),
@@ -48,6 +56,7 @@ app.post("/users", (request, response) => {
     lastname: body.lastname,
     phonenumber: body.phonenumber,
     email: body.email,
+    role: body.role,
   };
 
   fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
@@ -59,10 +68,8 @@ app.post("/users", (request, response) => {
     }
 
     const dataObject = JSON.parse(readData);
-    console.log(dataObject);
-    console.log("========");
+
     dataObject.push(newUser);
-    console.log(dataObject);
 
     fs.writeFile(
       "./Public/data/users.json",

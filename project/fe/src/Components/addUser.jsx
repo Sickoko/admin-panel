@@ -1,14 +1,16 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import About from "./about";
 export default function AddUser() {
   const URL = "http://localhost:8080/users";
@@ -18,14 +20,31 @@ export default function AddUser() {
     lastname: "",
     phonenumber: "",
     email: "",
+    role: "",
   };
   const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
   const [currentUser, setCurrentUser] = useState(newUser);
+  const ROLE_URL = "http://localhost:8080/users/roles";
+  const [roles, setRoles] = useState([]);
+  const [currentRole, setCurrentRole] = useState(1);
   useEffect(() => {
     fetchAllData();
   }, []);
-
+  useEffect(() => {
+    fetchRoles();
+  }, []);
+  async function fetchRoles() {
+    const FETCHED_DATA = await fetch(ROLE_URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setRoles(FETCHED_JSON.data);
+    console.log(roles);
+  }
+  function handleSelectChange(e) {
+    console.log(e.target.value);
+    setCurrentRole(e.target.value);
+  }
+  const navigate = useNavigate();
   async function fetchAllData() {
     const FETCHED_DATA = await fetch(URL); //reponse
     const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
@@ -40,6 +59,7 @@ export default function AddUser() {
         lastname: e.target.lastname.value,
         phonenumber: e.target.phonenumber.value,
         email: e.target.email.value,
+        role: currentRole,
       };
 
       const options = {
@@ -60,6 +80,7 @@ export default function AddUser() {
         lastname: currentUser.lastname,
         phonenumber: currentUser.phonenumber,
         email: currentUser.email,
+        role: currentRole,
       };
       console.log(putData, "putdata");
       const options = {
@@ -167,26 +188,24 @@ export default function AddUser() {
               value={currentUser.email}
               onChange={handleEmail}
             />
-            <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="admin"
-                name="radio-buttons-group"
+            <Grid item xs={12}>
+              <InputLabel>User Roles</InputLabel>
+              <Select
+                id="role-selector"
+                value={currentRole}
+                label="Roles"
+                onChange={handleSelectChange}
               >
-                <FormControlLabel
-                  value="admin"
-                  control={<Radio />}
-                  label="admin"
-                />
-                <FormControlLabel
-                  value="user"
-                  control={<Radio />}
-                  label="user"
-                />
-              </RadioGroup>
-            </FormControl>
+                {roles &&
+                  roles.map((role, idx) => {
+                    return (
+                      <MenuItem key={idx} value={role.id}>
+                        {role.name}
+                      </MenuItem>
+                    );
+                  })}
+              </Select>
+            </Grid>
             <FormLabel>Disabled</FormLabel>
             <Checkbox sx={{ display: "flex", justifyContent: "flex-start" }} />
             <FormLabel>Avatar</FormLabel>
