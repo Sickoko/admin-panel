@@ -9,15 +9,16 @@ import { Link } from "react-router-dom";
 export default function UsersTable() {
   const URL = "http://localhost:8080/users";
   const [users, setUsers] = useState([]);
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
+  async function fetchUsers() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
+    console.log(FETCHED_JSON);
     setUsers(FETCHED_JSON.data);
   }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   async function handleDelete(id) {
     const options = {
       method: "DELETE",
@@ -104,6 +105,18 @@ export default function UsersTable() {
             </Button>
           </FormControl>
 
+          {users &&
+            users.map((user, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
+                  <td>{user.email}</td>
+                  <td>{user.address}</td>
+                  <td>{user.role.name}</td>
+                </tr>
+              );
+            })}
           <DataGrid
             rows={users}
             columns={columns}
