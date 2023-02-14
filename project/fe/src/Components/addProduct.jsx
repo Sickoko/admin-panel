@@ -210,7 +210,7 @@ export default function AddProduct(id) {
         }}
       >
         <Typography color="gray" sx={{ pt: 2, fontSize: 28 }}>
-          Add Users
+          Add Products
         </Typography>
         <form onSubmit={handleFormSubmit}>
           <Box
@@ -247,7 +247,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="lastname"
+                name="title"
                 value={currentProduct.title}
                 onChange={handleTitle}
               />
@@ -261,7 +261,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="subtitle"
                 value={currentProduct.subtitle}
                 onChange={handleSubtitle}
               />
@@ -276,7 +276,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="price"
                 value={currentProduct.price}
                 onChange={handlePrice}
               />
@@ -290,7 +290,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="discount"
                 value={currentProduct.discount}
                 onChange={handleDiscount}
               />
@@ -304,7 +304,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="description"
                 value={currentProduct.description}
                 onChange={handleDescription}
               />
@@ -318,7 +318,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="descriptionn"
                 value={currentProduct.descriptionn}
                 onChange={handleDescriptionn}
               />
@@ -332,7 +332,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="code"
                 value={currentProduct.code}
                 onChange={handleCode}
               />
@@ -346,7 +346,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="hashtag"
                 value={currentProduct.hashtag}
                 onChange={handleHashtag}
               />
@@ -360,7 +360,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="technology"
                 value={currentProduct.technology}
                 onChange={handleTechnology}
               />
@@ -374,7 +374,7 @@ export default function AddProduct(id) {
                   minWidth: "550px",
                 }}
                 id="outlined-start-adornment"
-                name="phonenumber"
+                name="rating"
                 value={currentProduct.rating}
                 onChange={handleRating}
               />
