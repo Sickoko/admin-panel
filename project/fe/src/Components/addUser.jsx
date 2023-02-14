@@ -8,8 +8,6 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import Form from "@mui/material";
-import { fontSize, width } from "@mui/system";
 import { useState, useEffect } from "react";
 import About from "./about";
 export default function AddUser() {

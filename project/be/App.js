@@ -6,7 +6,6 @@ const express = require("express");
 const cors = require("cors");
 
 const fs = require("fs");
-const { response } = require("express");
 
 ///configuration of modules
 
