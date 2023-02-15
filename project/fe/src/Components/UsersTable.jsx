@@ -35,7 +35,13 @@ export default function UsersTable() {
   }
 
   const columns = [
-    { field: "firstname", headerName: "First name", width: 230 },
+    {
+      field: "firstname",
+      headerName: "First name",
+      width: 230,
+      valueGetter: (params) =>
+        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
     { field: "lastname", headerName: "Last name", width: 230 },
     { field: "phonenumber", headerName: "Phone Number", width: 200 },
     { field: "email", headerName: "E-Mail", width: 232 },
@@ -51,9 +57,8 @@ export default function UsersTable() {
         return (
           <Box width="100%">
             <Stack direction="row" spacing={1}>
-              <Link to={`/user/edit/${params.row.id}`}>
-                <Button variant="contained">Edit</Button>
-              </Link>
+              <Button variant="contained">Edit</Button>
+
               <Button
                 variant="contained"
                 onClick={() => handleDelete(params.row.id)}
@@ -117,13 +122,6 @@ export default function UsersTable() {
                 </tr>
               );
             })}
-          <DataGrid
-            rows={users}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
         </div>
       </div>
       <About />

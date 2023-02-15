@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import About from "./about";
 export default function AddUser() {
   const URL = "http://localhost:8080/users";
+  const ROLE_URL = "http://localhost:8080/users/roles";
   const newUser = {
     id: "",
     firstname: "",
@@ -25,7 +26,6 @@ export default function AddUser() {
   const [users, setUsers] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
   const [currentUser, setCurrentUser] = useState(newUser);
-  const ROLE_URL = "http://localhost:8080/users/roles";
   const [roles, setRoles] = useState([]);
   const [currentRole, setCurrentRole] = useState(1);
   useEffect(() => {
@@ -46,8 +46,8 @@ export default function AddUser() {
   }
   const navigate = useNavigate();
   async function fetchAllData() {
-    const FETCHED_DATA = await fetch(URL); //reponse
-    const FETCHED_JSON = await FETCHED_DATA.json(); // {status: 'success', data: {{id: ....}}}
+    const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
     setUsers(FETCHED_JSON.data);
   }
   async function handleSubmit(e) {
@@ -100,19 +100,6 @@ export default function AddUser() {
     }
   }
 
-  async function handleEdit(userId) {
-    setIsUpdate(true);
-    const filteredUser = users.filter((user) => user.id === userId)[0];
-    if (filteredUser) {
-      setCurrentUser({
-        id: filteredUser.id,
-        firstname: filteredUser.firstname,
-        lastname: filteredUser.lastname,
-        phonenumber: filteredUser.phonenumber,
-        email: filteredUser.email,
-      });
-    }
-  }
   function handleFirstname(e) {
     setCurrentUser({
       ...currentUser,

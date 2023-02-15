@@ -50,15 +50,6 @@ app.get("/users", (request, response) => {
 app.post("/users", (request, response) => {
   const body = request.body;
 
-  const newUser = {
-    id: Date.now().toString(),
-    firstname: body.firstname,
-    lastname: body.lastname,
-    phonenumber: body.phonenumber,
-    email: body.email,
-    role: body.role,
-  };
-
   fs.readFile("./Public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
@@ -68,23 +59,45 @@ app.post("/users", (request, response) => {
     }
 
     const dataObject = JSON.parse(readData);
-
-    dataObject.push(newUser);
-
-    fs.writeFile(
-      "./Public/data/users.json",
-      JSON.stringify(dataObject),
-      (writeError) => {
-        if (writeError) {
+    fs.readFile(
+      "./Public/data/userRole.json",
+      "utf-8",
+      (readError, readData) => {
+        if (readError) {
           response.json({
-            status: "Error during file write",
+            status: "file read error",
             data: [],
           });
         }
-        response.json({
-          status: "success",
-          data: dataObject,
-        });
+        const roleData = JSON.parse(readData);
+        const roleName = roleData.filter((role) => role.id === body.role)[0];
+        const newUser = {
+          firstname: body.firstname,
+          lastname: body.lastname,
+          email: body.email,
+          password: body.password,
+          address: body.address,
+          role: roleName,
+        };
+
+        dataObject.push(newUser);
+
+        fs.writeFile(
+          "./Public/data/users.json",
+          JSON.stringify(dataObject),
+          (writeError) => {
+            if (writeError) {
+              response.json({
+                status: "Error during file write",
+                data: [],
+              });
+            }
+            response.json({
+              status: "success",
+              data: dataObject,
+            });
+          }
+        );
       }
     );
   });
